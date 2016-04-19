@@ -1,0 +1,140 @@
+{
+  "words": {
+    
+    "parler": {
+      "type":"Verb",
+      "tenses": [
+        ["Je parlais","Tu parlais","Il parlait","Nous parlions","Vous parliez","Ils parlaient"],
+        ["Je parle","Tu parles","Il parle","Nous parlons","Vous parlez","Ils parlent"],
+        ["Je parlerai","Tu parleras","Il parlera","Nous parlerons","Vous parlerez","Ils parleront"]
+      ],
+      "synonyms": ["causer", "bavarder"],
+      "antonyms": ["se taire"],
+      "zoomin": ["chuchoter"],
+      "zoomout": ["crier"]
+    },
+    
+    "causer": {
+      "type":"Verb",
+      "tenses": [
+        ["Je causais","Tu causais","Il causait","Nous causions","Vous causiez","Ils causaient"],
+        ["Je cause","Tu cause","Il cause","Nous causons","Vous causez","Ils causent"],
+        ["Je causerai","Tu causeras","Il causera","Nous causerons","Vous causerez","Ils causeront"]
+      ],
+      "synonyms": ["parler", "bavarder"],
+      "antonyms": ["se taire"],
+      "zoomin": ["chuchoter"],
+      "zoomout": ["crier"]
+    },
+    
+    "bavarder": {
+      "type":"Verb",
+      "tenses": [
+        ["Je bavardais","Tu bavardais","Il bavardait","Nous bavardions","Vous bavardiez","Ils bavardaient"],
+        ["Je bavarde","Tu bavardes","Il bavarde","Nous bavardons","Vous bavardez","Ils bavardaient"],
+        ["Je bavarderai","Tu bavarderas","Il bavardera","Nous bavarderons","Vous bavarderez","Ils bavarderont"]
+      ],
+      "synonyms": ["parler", "causer"],
+      "antonyms": ["se taire"],
+      "zoomin": ["chuchoter"],
+      "zoomout": ["crier"]
+    },
+    
+    "se taire": {
+      "type":"Verb",
+      "tenses": [
+        ["Je me taisais","Tu te taisais","Il se taisait","Nous nous taisions","Vous vous taisiez","Ils se taisaient"],
+        ["Je me tais","Tu te tais","Il se tait","Nous nous taisons","Vous vous taisez","Ils se taisent"],
+        ["Je me tairai","Tu te tairas","Il se taira","Nous nous tairons","Vous vous tairez","Ils se tairont"]
+      ],
+      "synonyms": [],
+      "antonyms": ["parler", "bavarder"],
+      "zoomin": ["chuchoter"],
+      "zoomout": ["crier"]
+    },
+    
+    
+    
+    
+    "chuchoter": {
+      "type":"Verb",
+      "tenses": [
+        ["Je chuchotais", "Tu chuchotais", "Il chuchotait", "Nous chuchotions", "Vous chuchotiez", "Ils chuchotaient"], 
+        ["Je chuchote", "Tu chuchotes", "Il chuchote", "Nous chuchotons", "Vous chuchotez", "Ils chuchotent"], 
+        ["Je chuchoterai", "Tu chuchoteras", "Il chuchotera", "Nous chuchoterons", "Vous chuchoterez", "Ils chuchoteront"]
+      ],
+      "synonyms": [],
+      "antonyms": [],
+      "zoomin": [],
+      "zoomout": ["parler"]
+    },
+    
+    "crier": {
+      "type":"Verb",
+      "tenses": [
+        ["Je criais","Tu criais","Il criait","Nous criions","Vous criiez","Ils criaient"],
+        ["Je crie","Tu cries","Il crie","Nous crions","Vous criez","Ils crient"],
+        ["Je crierai","Tu crieras","Il criera","Nous crierons","Vous crierez","Ils crieront"]
+      ],
+      "synonyms": [],
+      "antonyms": [],
+      "zoomin": ["parler"],
+      "zoomout": ["hurler"]
+    },
+    
+    "hurler": {
+      "type":"Verb",
+      "tenses": [
+        ["Je hurlais","Tu hurlais","Il hurlait","Nous hurlions","Vous hurliez","Ils hurlaient"],
+        ["Je hurle","Tu hurles","Il hurle","Nous hurlons","Vous hurlez","Ils hurlent"],
+        ["Je hurlerai","Tu hurleras","Il hurlera","Nous hurlerons","Vous hurlerez","Ils hurleront"]
+      ],
+      "synonyms": [],
+      "antonyms": [],
+      "zoomin": ["crier"],
+      "zoomout": []
+    }
+  },
+  
+  
+  "stickers": [
+    {
+      "type":"Verb",
+      "person":5,
+      "tense":0,
+      "zooms": [
+        "chuchoter",
+        "parler",
+        "crier",
+        "hurler"
+      ],
+      "zoom":1
+    },
+    
+    {
+      "type":"Verb",
+      "person":5,
+      "tense":1,
+      "zooms": [
+        "chuchoter",
+        "parler",
+        "crier",
+        "hurler"
+      ],
+      "zoom":1
+    },
+    
+    {
+      "type":"Verb",
+      "person":5,
+      "tense":2,
+      "zooms": [
+        "chuchoter",
+        "parler",
+        "crier",
+        "hurler"
+      ],
+      "zoom":1
+    }
+  ]
+}
