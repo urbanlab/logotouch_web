@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css/styles.css" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
     
-    
     <script src="lib/jquery-1.12.2.min.js"></script>
     <script src="lib/jquery-ui.min.js"></script>
     <script src="lib/jquery.ui.touch-punch.min.js"></script>
@@ -21,8 +20,7 @@
 </head>
 <body>
   
-  <div id="StickersContainer">
-  </div>
+  <div id="StickersContainer"></div>
   
   <a style="position:fixed;bottom:0;right:0;width:20px;height:20px;background:#fff;display:block;" onclick="window.location.reload();"></a>
   

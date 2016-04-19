@@ -1,30 +1,38 @@
-var thresholdSwipeX = 120; // Tense
-var thresholdSwipeY = 60; // Person
-var thresholdSwipeScale = 1; // Zoom
+///////////////////////////////
+
+// Name of the scenario file (inside scenarios/ folder, without ".json")
 
 var SCENARIO = 'default';
+
+///////////////////////////////
+
+
+var thresholdSwipeX = 120;    // Tense
+var thresholdSwipeY = 60;     // Person
+var thresholdPinchScaleUnder1 = .3;  // Zoom
+var thresholdPinchScaleOver1 = .9;  // Zoom
+
 var WORDS;
 var STICKERS;
 
-var touch = {
-  x: 0,
-  y: 0
-};
-
 /*
+ *  How updates are handled between STICKERS and data()?
+ *
  *  STICKERS[index].prop = val  Change value
- *  attr('data-prop',val)       Fetch CSS selector [data-prop="val"]
+ *  attr('data-prop',val)       Fetch CSS selector (eg. .Sticker[data-prop="val"])
  */
 
 $(function() {
+  
+/*
+ *  Load scenario JSON
+ */
   
   $.getJSON( "scenarios/"+SCENARIO+".json", function (scenario) {
     WORDS = scenario.words;
     STICKERS = scenario.stickers;
     
-    for(var index in STICKERS) { 
-      console.log(STICKERS[index]); 
-      
+    for(var index in STICKERS) {       
       var DOM_Sticker = $('<div/>')
         .addClass('Sticker Type__'+STICKERS[index].type)
         .prop('id','Sticker'+index)
@@ -40,7 +48,6 @@ $(function() {
       
       initStickerEvents(index);
     }
-  }).done(function(){ 
   });
   
   
@@ -53,6 +60,7 @@ $(function() {
     
     var isPressed = false;
     var triggeredRotate = false;
+    var pinchTempScale = 1;
     
     $sticker.draggable({
       containment: $('#StickersContainer'),
@@ -118,7 +126,7 @@ $(function() {
           }
         }
             
-        STICKERS[index].tense = Math.min(Math.max(parseInt(STICKERS[index].tense), 0), WORDS[STICKERS[index].zooms[STICKERS[index].zoom]].tenses.length-1);
+        STICKERS[index].tense = Math.min(Math.max(parseInt(STICKERS[index].tense), 0), WORDS[STICKERS[index].word].tenses.length-1);
               
         console.log('Change: Tense');
         
@@ -149,7 +157,7 @@ $(function() {
           }
         }
         
-        STICKERS[index].person = Math.min(Math.max(parseInt(STICKERS[index].person), 0), WORDS[STICKERS[index].zooms[STICKERS[index].zoom]].tenses[STICKERS[index].tense].length-1);
+        STICKERS[index].person = Math.min(Math.max(parseInt(STICKERS[index].person), 0), WORDS[STICKERS[index].word].tenses[STICKERS[index].tense].length-1);
         
         console.log('Change: Person');
         
@@ -161,15 +169,73 @@ $(function() {
       }    
     });  
     
+    /*
+     
+      Handle zoom :
+      - Handle Stickers size
+      - Set a greater step for …Under1
+      
+     */
+    
     mc.on('pinchstart', function(ev) {
-      $sticker.data('scaleTemp',STICKERS[index].zoom);
-      $sticker.attr('data-scaleTemp',STICKERS[index].zoom);
+      $sticker.data('oldPinchScale',1);      
     });
     
     mc.on('pinch', function(ev) {
+      var oldPinchScale = $sticker.data('oldPinchScale');
+      
+      if (ev.scale >= 1) {
+        var pinchScale = parseInt(ev.scale/thresholdPinchScaleOver1);
+      } else {
+        var pinchScale = parseInt(ev.scale/thresholdPinchScaleUnder1);
+      }
+      
+      
+      $sticker.data('oldPinchScale', pinchScale);
+      
+      
+      if (!ev.isFirst) {
+      
+        // We change the value when the gesture fetches thresholdPinchScale's step
+        
+        if (pinchScale != oldPinchScale) {
+          if (pinchScale > oldPinchScale) {
+          console.log("zoomout");
+            if (WORDS[STICKERS[index].word].zoomout.length > 0) {
+              STICKERS[index].word = WORDS[STICKERS[index].word].zoomout[parseInt(Math.random()*WORDS[STICKERS[index].word].zoomout.length)];
+            }
+          }
+          if (pinchScale < oldPinchScale) {
+          console.log("zoomin");
+            if (WORDS[STICKERS[index].word].zoomin.length > 0) {
+              STICKERS[index].word = WORDS[STICKERS[index].word].zoomin[parseInt(Math.random()*WORDS[STICKERS[index].word].zoomin.length)];
+            }
+          }
+        }
+      
+      }
+      
+      
+    //  scaleTemp = Math.min(Math.max(scaleTemp, 0), STICKERS[index].zooms.length-1);
+      
+    //  STICKERS[index].zoom = scaleTemp;
+      
+      console.log('Change: zoom');
+      
+      changeState(index);
+      
+      if (!triggeredRotate && (ev.rotation > 160 && ev.rotation < 200) || (ev.rotation < -160 && ev.rotation > -200)) {
+        triggeredRotate = true;
+        
+        console.log('Set antonym');
+      }
+    });
+    
+    /*
+    mc.on('pinch', function(ev) {
       
       var scaleTemp = $sticker.data('scaleTemp');
-      var scalePinch = (ev.scale/thresholdSwipeScale);
+      var scalePinch = (ev.scale/thresholdPinchScale);
       var scaleGot;
       
       if (scalePinch >= 1) {
@@ -196,7 +262,7 @@ $(function() {
       
       changeState(index);
       
-      console.log(ev.rotation);
+    //  console.log(ev.rotation);
       
       if (!triggeredRotate && (ev.rotation > 160 && ev.rotation < 200) || (ev.rotation < -160 && ev.rotation > -200)) {
         triggeredRotate = true;
@@ -204,6 +270,7 @@ $(function() {
         console.log('Set antonym');
       }
     });
+    */
     
     function releasePress() {
       isPressed = false;
@@ -216,7 +283,7 @@ $(function() {
       $sticker.attr('data-person', STICKERS[index].person);
       $sticker.attr('data-tense', STICKERS[index].tense);
       
-      word = WORDS[STICKERS[index].zooms[STICKERS[index].zoom]].tenses[STICKERS[index].tense][STICKERS[index].person];
+      word = WORDS[STICKERS[index].word].tenses[STICKERS[index].tense][STICKERS[index].person];
       $inner.text(word);
     }
   }

@@ -100,6 +100,7 @@
   "stickers": [
     {
       "type":"Verb",
+      "word":"parler",
       "person":5,
       "tense":0,
       "zooms": [
@@ -113,6 +114,7 @@
     
     {
       "type":"Verb",
+      "word":"se taire",
       "person":5,
       "tense":1,
       "zooms": [
@@ -126,6 +128,7 @@
     
     {
       "type":"Verb",
+      "word":"parler",
       "person":5,
       "tense":2,
       "zooms": [
