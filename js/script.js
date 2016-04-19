@@ -1,8 +1,8 @@
 ///////////////////////////////
 
-// Name of the scenario file (inside scenarios/ folder, without ".json")
+// Name of the corpus file (inside corpus/ folder, without ".json")
 
-var SCENARIO = 'default';
+var CORPUS = 'default';
 
 ///////////////////////////////
 
@@ -25,12 +25,12 @@ var STICKERS;
 $(function() {
   
 /*
- *  Load scenario JSON
+ *  Load corpus JSON
  */
   
-  $.getJSON( "scenarios/"+SCENARIO+".json", function (scenario) {
-    WORDS = scenario.words;
-    STICKERS = scenario.stickers;
+  $.getJSON( "corpus/"+CORPUS+".json", function (corpus) {
+    WORDS = corpus.words;
+    STICKERS = corpus.stickers;
     
     for(var index in STICKERS) {       
       var DOM_Sticker = $('<div/>')
