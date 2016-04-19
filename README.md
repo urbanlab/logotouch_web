@@ -20,12 +20,12 @@ Web-based version of Logotouch
     }
   },
   
-  "stickers": {
+  "stickers": [
     {
       "word":"parler",
       "person":5,
       "tense":0
     }
-  }
+  ]
 }
 ```
